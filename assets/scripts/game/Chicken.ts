@@ -304,14 +304,13 @@ export class Chicken extends Component {
             }
 
             // Notify luk that chicken reached it
-            luk.onChickenReached();
+            luk.onChickenReached(); 
 
             // If reached the EndCard luk (e.g., fourth step), freeze and show EndCard
             if (lukIndex === this.endCardLukIndex) {
               this.triggerEndCard();
               return;
             }
-
             // Check death luk
             if (lukIndex === this.deathLukIndex) {
               this.triggerDeath();
