@@ -24,6 +24,12 @@ export class StartScreen extends Component {
     @property(BalanceController)
     private balanceController: BalanceController = null;
 
+    @property({ type: Node, tooltip: 'Finger pointer shown on the Start Screen' })
+    private startFinger: Node = null;
+
+    @property({ type: Node, tooltip: 'Finger pointer shown near the GO button on gameplay screen' })
+    private goFinger: Node = null;
+
     /**
      * Called when the component is enabled.
      */
@@ -32,6 +38,10 @@ export class StartScreen extends Component {
         if (this.goButton) {
             this.goButton.interactable = false;
         }
+
+        // Show only Start Screen finger while Start Screen is active
+        if (this.startFinger) this.startFinger.active = true;
+        if (this.goFinger) this.goFinger.active = false;
     }
 
     /**
@@ -99,6 +109,10 @@ export class StartScreen extends Component {
         if (this.goButton) {
             this.goButton.interactable = true;
         }
+
+        // Toggle fingers: hide Start finger, show GO finger when Start Screen is hidden
+        if (this.startFinger) this.startFinger.active = false;
+        if (this.goFinger) this.goFinger.active = true;
 
         // Deactivate this screen
         this.node.active = false;
