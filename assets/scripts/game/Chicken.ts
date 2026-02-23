@@ -58,6 +58,9 @@ export class Chicken extends Component {
   })
   private endCardLukIndex: number = 3;
 
+  @property({ type: Node, tooltip: 'Finger pointer shown near the GO button on gameplay screen' })
+  private goFinger: Node = null;
+
   @property({
     tooltip: 'Jump duration in seconds',
   })
@@ -404,6 +407,11 @@ export class Chicken extends Component {
     // Show EndCard screen
     if (this.endCardScreen) {
       this.endCardScreen.active = true;
+    }
+
+    // Hide GO finger while EndCard is visible
+    if (this.goFinger) {
+      this.goFinger.active = false;
     }
   }
 
