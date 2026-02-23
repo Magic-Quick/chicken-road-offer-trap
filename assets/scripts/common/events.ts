@@ -1,0 +1,13 @@
+export const EVT_TAP = 'Tap';
+export const EVT_DRAG_START = 'DragStart';
+export const EVT_DRAG_MOVE = 'DragMove';
+export const EVT_DRAG_END = 'DragEnd';
+export const EVT_DRAG_CANCEL = 'DragCancel';
+export const EVT_HITTABLE_REGISTER = 'HittableRegister';
+export const EVT_HITTABLE_UNREGISTER = 'HittableUnregister';
+export const EVT_PLAY_SOUND = 'PlaySound';
+export const EVT_PLAY_SOUND_LOOP = 'PlaySoundLoop';
+export const EVT_SCRATCH_MOVE = 'ScratchMove';
+export const EVT_SCRATCH_WIN = 'ScratchWin';
+export const EVT_CARD_SHOW = 'CardShow';
+export const EVT_CARD_HIDE = 'CardHide';

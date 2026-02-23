@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "5b3b4876-729b-4624-980b-eb3f14989883",
+  "files": [
+    ".json",
+    ".webp"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "5b3b4876-729b-4624-980b-eb3f14989883@6c48a",
+      "displayName": "Elements - Sparks 090 Explosion Radial MIX noCT noRSZ 0111_5_11zon",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "5b3b4876-729b-4624-980b-eb3f14989883",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "5b3b4876-729b-4624-980b-eb3f14989883@f9941",
+      "displayName": "Elements - Sparks 090 Explosion Radial MIX noCT noRSZ 0111_5_11zon",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 12.5,
+        "offsetY": -29,
+        "trimX": 297,
+        "trimY": 89,
+        "width": 454,
+        "height": 455,
+        "rawWidth": 1023,
+        "rawHeight": 575,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -227,
+            -227.5,
+            0,
+            227,
+            -227.5,
+            0,
+            -227,
+            227.5,
+            0,
+            227,
+            227.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            297,
+            486,
+            751,
+            486,
+            297,
+            31,
+            751,
+            31
+          ],
+          "nuv": [
+            0.2903225806451613,
+            0.05391304347826087,
+            0.7341153470185728,
+            0.05391304347826087,
+            0.2903225806451613,
+            0.8452173913043478,
+            0.7341153470185728,
+            0.8452173913043478
+          ],
+          "minPos": [
+            -227,
+            -227.5,
+            0
+          ],
+          "maxPos": [
+            227,
+            227.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "5b3b4876-729b-4624-980b-eb3f14989883@6c48a",
+        "atlasUuid": "",
+        "trimType": "auto"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "5b3b4876-729b-4624-980b-eb3f14989883@6c48a"
+  }
+}

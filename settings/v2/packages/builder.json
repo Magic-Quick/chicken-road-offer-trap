@@ -1,0 +1,13 @@
+{
+  "__version__": "1.3.9",
+  "splash-setting": {
+    "logo": {
+      "image": "project://settings/Frame 354.png",
+      "type": "custom"
+    },
+    "background": {
+      "type": "color"
+    },
+    "totalTime": 500
+  }
+}
