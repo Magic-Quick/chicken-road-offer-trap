@@ -8829,7 +8829,7 @@
         "__id__": 310
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 322
@@ -9092,8 +9092,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -42.442,
-      "y": 85.673,
+      "x": -21.42,
+      "y": 73.158,
       "z": 0
     },
     "_lrot": {
@@ -9266,7 +9266,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 581.04443359375,
+      "width": 537.8584594726562,
       "height": 112.99999999999999
     },
     "_anchorPoint": {
@@ -9299,8 +9299,8 @@
     "_string": "Your €1500 + 250 FS bonus has been saved! \nInstall the app to activate your account.",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 29.6,
-    "_fontSize": 29.6,
+    "_actualFontSize": 27.4,
+    "_fontSize": 27.4,
     "_fontFamily": "Arial",
     "_lineHeight": 50,
     "_overflow": 0,
@@ -9362,8 +9362,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -235.703,
-      "y": 87.597,
+      "x": -214.681,
+      "y": 75.082,
       "z": 0
     },
     "_lrot": {
@@ -9462,8 +9462,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 600,
-      "height": 300
+      "width": 559.2,
+      "height": 279.7
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -10751,10 +10751,14 @@
       {
         "__uuid__": "fefdb48f-c933-4973-9cd3-bcf295958801",
         "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "f14fed4c-8249-4472-924d-1492d1d04488",
+        "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "fefdb48f-c933-4973-9cd3-bcf295958801",
+      "__uuid__": "f14fed4c-8249-4472-924d-1492d1d04488",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": "97qZf/kjFLXpWojOimlpfs"
@@ -11698,7 +11702,7 @@
       }
     ],
     "_defaultClip": {
-      "__uuid__": "f14fed4c-8249-4472-924d-1492d1d04488",
+      "__uuid__": "fefdb48f-c933-4973-9cd3-bcf295958801",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": "1bwZlF3ZdCkoygqtR4IhaL"
