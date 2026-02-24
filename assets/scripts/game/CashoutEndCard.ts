@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Button, Label, UIOpacity, tween, Vec3 } from 'cc';
+import { _decorator, Component, Node, Button, Label, UIOpacity, tween, Vec3, UITransform, Canvas, view, find } from 'cc';
 import { GlobalEventBus } from '../common/event-bus';
 
 const { ccclass, property } = _decorator;
@@ -30,11 +30,8 @@ export class CashoutEndCard extends Component {
   @property(Node)
   public riskButtonNode: Node = null;
 
-  @property(Label)
-  public takeButtonLabel: Label = null;
-
-  @property(Label)
-  public riskButtonLabel: Label = null;
+  @property(Node)
+  public DarkenOverlayNode: Node = null;
 
   @property({
     tooltip: 'Fade-in duration for buttons (GDD: 0.3 s)',
@@ -55,6 +52,9 @@ export class CashoutEndCard extends Component {
   private _unsub: (() => void) | null = null;
   private _takeUiOpacity: UIOpacity = null;
   private _riskUiOpacity: UIOpacity = null;
+  private _overlayUI: UITransform | null = null;
+  private _canvasUI: UITransform | null = null;
+  private _resizeBound: (() => void) | null = null;
 
   // ─── Lifecycle ──────────────────────────────────────────────────────────────
 
@@ -62,10 +62,20 @@ export class CashoutEndCard extends Component {
     // this._unsub = GlobalEventBus.subscribe(EVT_ENDCARD_SHOW, () => {
     //   this._showButtons();
     // });
+    
+    // Cache UITransform for overlay
+    this._overlayUI = this.DarkenOverlayNode ? this.DarkenOverlayNode.getComponent(UITransform) : null;
+    // Bind resize callback
+    this._resizeBound = () => this._resizeOverlayToCanvas();
   }
 
   onEnable() {
     this._showButtons();
+    // Ensure overlay stretches to the device viewport
+    this._ensureCanvasUI();
+    this._resizeOverlayToCanvas();
+    view.on('canvas-resize', this._resizeBound!, this);
+    view.on('design-resolution-changed', this._resizeBound!, this);
   }
 
   update(dt: number) {
@@ -92,6 +102,11 @@ export class CashoutEndCard extends Component {
 
   onDestroy() {
     if (this._unsub) { this._unsub(); this._unsub = null; }
+    if (this._resizeBound) {
+      view.off('canvas-resize', this._resizeBound, this);
+      view.off('design-resolution-changed', this._resizeBound, this);
+      this._resizeBound = null;
+    }
   }
 
   // ─── Button handlers ─────────────────────────────────────────────────────────
@@ -164,14 +179,6 @@ export class CashoutEndCard extends Component {
         .start();
     }
 
-    // Set button labels (GDD §6)
-    if (this.takeButtonLabel) {
-      this.takeButtonLabel.string = 'TAKE €1500 + 250 FREE SPINS';
-    }
-    if (this.riskButtonLabel) {
-      this.riskButtonLabel.string = 'RISK IT ALL';
-    }
-
     // Wire up Button components if present
     this._wireButtonEvents();
   }
@@ -210,6 +217,43 @@ export class CashoutEndCard extends Component {
       uiOpacity = node.addComponent(UIOpacity);
     }
     return uiOpacity;
+  }
+
+  /** Ensure we have a reference to the Canvas UITransform */
+  private _ensureCanvasUI(): void {
+    if (this._canvasUI && this._canvasUI.isValid) return;
+    // Prefer ancestor Canvas
+    let p: Node | null = this.node;
+    while (p) {
+      const c = p.getComponent(Canvas);
+      if (c) {
+        const ui = p.getComponent(UITransform);
+        if (ui) this._canvasUI = ui;
+        return;
+      }
+      p = p.parent;
+    }
+    // Fallback by name
+    const canvasNode = find('Canvas');
+    if (canvasNode) {
+      const ui = canvasNode.getComponent(UITransform);
+      if (ui) this._canvasUI = ui;
+    }
+  }
+
+  /** Resize DarkenOverlayNode to exactly match the Canvas size */
+  private _resizeOverlayToCanvas(): void {
+    if (!this._overlayUI || !this._overlayUI.isValid) {
+      this._overlayUI = this.DarkenOverlayNode ? this.DarkenOverlayNode.getComponent(UITransform) : null;
+    }
+    this._ensureCanvasUI();
+    if (!this._overlayUI || !this._canvasUI) return;
+
+    const w = this._canvasUI.width;
+    const h = this._canvasUI.height;
+    if (w > 0 && h > 0) {
+      this._overlayUI.setContentSize(w, h);
+    }
   }
 }
 
