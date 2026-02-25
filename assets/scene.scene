@@ -8298,7 +8298,7 @@
         "__id__": 336
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 345
@@ -11990,7 +11990,6 @@
     "riskButtonNode": {
       "__id__": 373
     },
-    "DarkenOverlayNode": null,
     "fadeInDuration": 0.3,
     "glowPeriod": 1.2,
     "_id": "cf1VFK1a1BtamXXKyLMDm6"
