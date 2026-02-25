@@ -1,3 +1,4 @@
+import super_html_playable from './super_html_playable';
 import super_html from './super_html_playable';
 import { _decorator, Component, Sprite, tween } from 'cc';
 const { ccclass, property } = _decorator;
@@ -14,8 +15,9 @@ export class SuperHtmlInitializer extends Component {
     } 
 
     public Download() : void
-       {
+    {
         super_html.download();
+        super_html_playable.game_end();
     }
 }
 
