@@ -1,62 +1,71 @@
-import { _decorator, Component, UIOpacity, tween } from 'cc';
+import { _decorator, Component, UIOpacity, tween, UITransform, view, Size } from 'cc';
 
 const { ccclass, property } = _decorator;
 
-/**
- * DarkenOverlay — full-screen black rectangle that fades to 0.72 opacity
- * when the Freeze state is entered (GDD §4, §6 Freeze screen).
- *
- * Attach to a full-screen Sprite node with black color.
- * The node should start inactive; GameController activates it on Freeze.
- */
 @ccclass('DarkenOverlay')
 export class DarkenOverlay extends Component {
-  @property({
-    tooltip: 'Fade-in duration in seconds (GDD: 0.4)',
-  })
-  public fadeDuration: number = 0.4;
 
-  @property({
-    tooltip: 'Target opacity 0–1 (GDD: 0.72)',
-  })
-  public targetOpacity: number = 0.72;
+  @property
+  fadeDuration: number = 0.4;
 
-  private _uiOpacity: UIOpacity = null;
-  private _unsub: (() => void) | null = null;
+  @property
+  targetOpacity: number = 0.72;
+
+  private _uiOpacity: UIOpacity = null!;
+  private _uiTransform: UITransform = null!;
+  private _resizeCallback: () => void;
 
   onLoad() {
-    // this._unsub = GlobalEventBus.subscribe(EVT_GAME_FREEZE, () => {
-    //   this._fadeIn();
-    // });
+
+    this._uiTransform = this.getComponent(UITransform)!;
+
+    this._resizeCallback = this._resizeToScreen.bind(this);
+
   }
 
   onEnable() {
-    // When node becomes active (triggered by GameController), start fade
+
+    this._resizeToScreen();
+
+    view.on('canvas-resize', this._resizeCallback, this);
+
     this._fadeIn();
+
   }
 
-  onDestroy() {
-    if (this._unsub) { this._unsub(); this._unsub = null; }
+  onDisable() {
+
+    view.off('canvas-resize', this._resizeCallback, this);
+
   }
 
-  private _fadeIn(): void {
-    let uiOpacity = this._uiOpacity;
-    if (!uiOpacity) {
-      uiOpacity = this.node.getComponent(UIOpacity);
-      if (!uiOpacity) {
-        uiOpacity = this.node.addComponent(UIOpacity);
-      }
-      this._uiOpacity = uiOpacity;
-    }
+  private _resizeToScreen() {
 
-    // Start from 0 opacity
-    uiOpacity.opacity = 0;
+    const visibleSize: Size = view.getVisibleSize();
 
-    // Target opacity: 0.72 → 255 * 0.72 ≈ 184
-    const targetOpacity255 = Math.round(this.targetOpacity * 255);
+    this._uiTransform.setContentSize(
+      visibleSize.width,
+      visibleSize.height
+    );
 
-    tween(uiOpacity)
-      .to(this.fadeDuration, { opacity: targetOpacity255 }, { easing: 'linear' })
+    // ensure centered
+    this.node.setPosition(0, 0, 0);
+
+  }
+
+  private _fadeIn() {
+
+    this._uiOpacity = this.getComponent(UIOpacity)
+      || this.addComponent(UIOpacity);
+
+    this._uiOpacity.opacity = 0;
+
+    tween(this._uiOpacity)
+      .to(this.fadeDuration, {
+        opacity: Math.round(this.targetOpacity * 255)
+      })
       .start();
+
   }
+
 }
